@@ -7,10 +7,19 @@ import 'package:flutter/material.dart';
 void main() => runApp(MyApp());
 
 // ignore: use_key_in_widget_constructors
-class MyApp extends StatelessWidget {
-  void answerQuestion() {
-    // ignore: avoid_print
-    print('Answer Chosen');
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
   }
 
   @override
@@ -27,17 +36,15 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: [
             Text(
-              questions[0],
+              questions[_questionIndex],
             ),
             ElevatedButton(
-                onPressed: () => print('Answer 1 chosen'),
-                child: const Text('Answer 1')),
+                onPressed: _answerQuestion, child: const Text('Answer 1')),
             ElevatedButton(
-                onPressed: () => print('Answer 2 chosen'),
-                child: const Text('Answer 2')),
+                onPressed: _answerQuestion, child: const Text('Answer 2')),
             ElevatedButton(
                 onPressed: () {
-                  print('Answer 3 chosen');
+                  _answerQuestion();
                 },
                 child: const Text('Answer 3')),
           ],
