@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
+import './quiz.dart';
+import './result.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -17,40 +18,47 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'White'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+    },
+    {
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': ['Max', 'Anjela', 'Adi'],
+    },
+  ];
   var _questionIndex = 0;
   void _answerQuestion() {
+    // var aBool = false;
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
+    if (_questionIndex < _questions.length) {
+      print('We have more questions!');
+    } else {
+      print('No more questions!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = const [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?',
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex],
-            ),
-            ElevatedButton(
-                onPressed: _answerQuestion, child: const Text('Answer 1')),
-            ElevatedButton(
-                onPressed: _answerQuestion, child: const Text('Answer 2')),
-            ElevatedButton(
-                onPressed: () {
-                  _answerQuestion();
-                },
-                child: const Text('Answer 3')),
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(),
       ),
     );
   }
