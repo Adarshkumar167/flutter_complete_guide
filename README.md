@@ -2,6 +2,16 @@
 
 A new Flutter project.
 
+# To Run This app
+
+Install flutter and run flutter doctor in powershell.
+Install all the dependencies required to run the project.
+
+# Command to run this app
+
+flutter pub get
+flutter run
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
