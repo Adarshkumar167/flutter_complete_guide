@@ -10,6 +10,7 @@ Install all the dependencies required to run the project.
 # Command to run this app
 
 flutter pub get
+
 flutter run
 
 ## Getting Started
